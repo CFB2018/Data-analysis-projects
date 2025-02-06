@@ -26,3 +26,7 @@ print(columns_with_missing_values)
 # Replace missing values in the 'Screen_Size_cm' column with the most frequent value
 most_frequent_value = df['Screen_Size_cm'].mode()[0]
 df['Screen_Size_cm'].fillna(most_frequent_value)
+
+# Replace missing values in the 'Weight_kg' column with the mean value
+mean_value = df['Weight_kg'].mean()
+df['Weight_kg'].fillna(mean_value)

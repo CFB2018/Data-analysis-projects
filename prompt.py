@@ -34,18 +34,20 @@ df['Screen_Size_cm'].fillna(most_frequent_value, inplace=True)
 mean_value = df['Weight_kg'].mean()
 df['Weight_kg'].fillna(mean_value, inplace=True)
 
-# print(df['Weight_kg'].dtype) #float64
-#print(mean_value) #1.8622317596566522
-
 # Check for remaining missing values in both columns
 missing_screen_size = df['Screen_Size_cm'].isna().sum()
 missing_weight = df['Weight_kg'].isna().sum()
-print("Remaining missing values in 'Screen_Size_cm': {}".format(missing_screen_size))
-print("Remaining missing values in 'Weight_kg': {}".format(missing_weight))
 
 # Normalize the content under CPU_frequency and max value
 max_value = df['CPU_frequency'].max()
 df['CPU_frequency'] = df['CPU_frequency'] / max_value
 
-# Build the prompt
+# Build the prompt -.> categorical to numerical variables so that it can be used for predictive modeling
+# Convert the 'Screen' attribute into indicator variables
+df1 = pd.get_dummies(df['Screen'], prefix='Screen')
 
+# Append df1 into the original data frame df
+df = pd.concat([df, df1], axis=1)
+# Drop the original 'Screen' attribute from the data frame
+df.drop('Screen', axis=1, inplace=True)
+print(df.head())

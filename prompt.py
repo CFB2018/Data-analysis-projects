@@ -64,3 +64,14 @@ df['Price_Euros'] = df['Price'] * conversion_rate
 
 df.drop('Price', axis=1, inplace=True)
 print(df.head())
+
+# Build a prompt to perform min-max normalization on the CPU_frequency parameter. This is a common technique used in machine learning to scale the data to a common range.
+# Perform min-max normalization on the 'CPU_frequency' parameter
+from sklearn.preprocessing import MinMaxScaler
+
+# Create a MinMaxScaler object
+scaler = MinMaxScaler()
+
+# Fit the scaler to the 'CPU_frequency' column and transform the values
+df[['CPU_frequency']] = scaler.fit_transform(df[['CPU_frequency']])
+print(df.head())

@@ -42,7 +42,8 @@ missing_weight = df['Weight_kg'].isna().sum()
 max_value = df['CPU_frequency'].max()
 df['CPU_frequency'] = df['CPU_frequency'] / max_value
 
-# Build the prompt -.> categorical to numerical variables so that it can be used for predictive modeling
+
+# Build a prompt that turns categorical to numerical variables (ultimately used for predictive modeling)
 # Convert the 'Screen' attribute into indicator variables
 df1 = pd.get_dummies(df['Screen'], prefix='Screen')
 
@@ -50,4 +51,16 @@ df1 = pd.get_dummies(df['Screen'], prefix='Screen')
 df = pd.concat([df, df1], axis=1)
 # Drop the original 'Screen' attribute from the data frame
 df.drop('Screen', axis=1, inplace=True)
+print(df.head())
+
+# Build a prompt that converts the values in Price from USD to Euros
+print(df['Price'].dtype)
+
+# Conversion rate from USD to Euros
+conversion_rate = 0.95
+
+# Create a new column named Price_euros
+df['Price_Euros'] = df['Price'] * conversion_rate
+
+df.drop('Price', axis=1, inplace=True)
 print(df.head())

@@ -25,21 +25,27 @@ print(columns_with_missing_values)
 
 # Replace missing values in the 'Screen_Size_cm' column with the most frequent value
 most_frequent_value = df['Screen_Size_cm'].mode()[0]
-df['Screen_Size_cm'].fillna(most_frequent_value)
+df['Screen_Size_cm'].fillna(most_frequent_value, inplace=True)
 
 # print(most_frequent_value) #39.624
 # print(df['Screen_Size_cm'].dtype) #float64
 
 # Replace missing values in the 'Weight_kg' column with the mean value
 mean_value = df['Weight_kg'].mean()
-df['Weight_kg'].fillna(mean_value)
+df['Weight_kg'].fillna(mean_value, inplace=True)
 
 # print(df['Weight_kg'].dtype) #float64
-print(mean_value) #1.8622317596566522
+#print(mean_value) #1.8622317596566522
 
 # Check for remaining missing values in both columns
 missing_screen_size = df['Screen_Size_cm'].isna().sum()
 missing_weight = df['Weight_kg'].isna().sum()
-
 print("Remaining missing values in 'Screen_Size_cm': {}".format(missing_screen_size))
 print("Remaining missing values in 'Weight_kg': {}".format(missing_weight))
+
+# Normalize the content under CPU_frequency and max value
+max_value = df['CPU_frequency'].max()
+df['CPU_frequency'] = df['CPU_frequency'] / max_value
+
+# Build the prompt
+

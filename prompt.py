@@ -11,3 +11,6 @@ file_path = "C:\\Users\\marbj610\\Documents\\Repository\\Data-analysis-projects\
 # Read the CSV file
 df = pd.read_csv(file_path)
 print(df.head())
+
+# Identify missing values in the data
+columns_with_missing_values = df.columns[df.isnull().any()]

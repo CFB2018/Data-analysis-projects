@@ -22,3 +22,7 @@ print(columns_with_missing_values)
 # Missing entries in columns containing categorical values need to be replaced with the most frequent entries
 # Missing entries in columns with continuous data need to be replaced with the mean value of the column
 # If a value is missing in the target column, you may need to drop that row
+
+# Replace missing values in the 'Screen_Size_cm' column with the most frequent value
+most_frequent_value = df['Screen_Size_cm'].mode()[0]
+df['Screen_Size_cm'].fillna(most_frequent_value)
